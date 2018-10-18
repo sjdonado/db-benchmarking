@@ -2,6 +2,7 @@ version: '3'
 services:
     www:
         build: .
+        container_name: www
         volumes:
             - ./www:/www
         links:
@@ -14,15 +15,20 @@ services:
         image: mongo
         container_name: mongo
         restart: always
+        volumes:
+            - ./dump:/dump
         ports:
-            - 27020:27017
+            - 27017:27017
     mysql:
         image: mysql
+        container_name: mysql
         restart: always
         ports: 
             - 3306:3306
+        volumes:
+            - ./dump/scriptSales100K.sql:/docker-entrypoint-initdb.d/Sales100K.sql
         environment:
-            MYSQL_DATABASE: scriptSales100K
+            MYSQL_DATABASE: Sales100K
             MYSQL_USER: user
             MYSQL_PASSWORD: test
             MYSQL_ROOT_PASSWORD: test

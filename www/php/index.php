@@ -2,4 +2,11 @@
 
 require_once __DIR__ . "/vendor/autoload.php";
 
-$client = new MongoDB\Client('mongodb://localhost:27017/taller5');
+$mysqlserver = "mysql";
+$username = "user";
+$password = "test";
+$dbname = "Sales100K";
+$uri = 'mongodb://mongodb:27017/taller5';
+
+require_once 'connect_mongo.php';
+require_once 'connect_mysql.php';

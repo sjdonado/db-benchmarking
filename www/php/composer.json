@@ -1,7 +1,7 @@
 {
     "name": "juans/php",
     "require": {
-        "mongodb/mongodb": "^1.4"
+        "mongodb/mongodb": "^1.4.2"
     },
     "authors": [
         {
