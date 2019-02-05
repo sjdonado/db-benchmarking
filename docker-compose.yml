@@ -1,24 +1,26 @@
 version: '3'
 services:
-    www:
+    node:
         build: .
-        container_name: www
+        container_name: node
         volumes:
-            - ./www:/www
+            - ./app:/app
+        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; node /app/index.js"
         links:
             - mongodb
             - mysql
         depends_on:
             - mongodb
-            - phpmyadmin
+            - mysql
     mongodb:
         image: mongo
         container_name: mongo
         restart: always
-        volumes:
-            - ./dump:/dump
         ports:
             - 27017:27017
+        volumes:
+            - ./dump/fulldb05-02-2019 19-51.json:/docker-entrypoint-initdb.d/dump/fulldb05-02-2019 19-51.json
+            - ./dump/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     mysql:
         image: mysql
         container_name: mysql
@@ -26,21 +28,19 @@ services:
         ports: 
             - 3306:3306
         volumes:
-            - ./dump/scriptSales100K.sql:/docker-entrypoint-initdb.d/Sales100K.sql
+            - ./dump/fulldb05-02-2019 19-51.sql:/docker-entrypoint-initdb.d/fulldb05-02-2019 19-51.sql
         environment:
-            MYSQL_DATABASE: Sales100K
-            MYSQL_USER: user
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links: 
-            - mysql:db
-        ports:
-            - 8080:80
-        environment:
-            MYSQL_USER: user
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test
-        depends_on:
-            - mysql
+            MYSQL_DATABASE: Benchmark
+            MYSQL_ROOT_PASSWORD: rootpass
+    # phpmyadmin:
+    #     image: phpmyadmin/phpmyadmin
+    #     links: 
+    #         - mysql:db
+    #     ports:
+    #         - 8080:80
+    #     environment:
+    #         MYSQL_USER: user
+    #         MYSQL_PASSWORD: test
+    #         MYSQL_ROOT_PASSWORD: test
+    #     depends_on:
+    #         - mysql
