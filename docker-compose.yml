@@ -28,6 +28,7 @@ services:
         ports: 
             - 3306:3306
         volumes:
+            -  ./config/my.cnf:/etc/my.cnf
             - ./dump/fulldb05-02-2019 19-51.sql:/docker-entrypoint-initdb.d/fulldb05-02-2019 19-51.sql
         environment:
             MYSQL_DATABASE: Benchmark
