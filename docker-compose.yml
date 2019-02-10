@@ -1,11 +1,11 @@
 version: '3'
 services:
     node:
-        build: .
+        image: node:lts-jessie
         container_name: node
         volumes:
             - ./app:/app
-        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; node /app/index.js"
+        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; if [ ! -d 'node_modules' ]; then npm install; fi; node /app/index.js"
         links:
             - mongodb
             - mysql
