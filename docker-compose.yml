@@ -4,8 +4,8 @@ services:
         image: node:lts-jessie
         container_name: node
         volumes:
-            - ./app:/app
-        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; if [ ! -d 'node_modules' ]; then npm install; fi; node /app/index.js"
+            - ./app:/usr/src/app
+        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; if [ ! -d 'node_modules' ]; then npm install --prefix /usr/src/app; fi; node /usr/src/app/index.js"
         links:
             - mongodb
             - mysql
@@ -19,7 +19,6 @@ services:
         ports:
             - 27017:27017
         volumes:
-            - ./dump/fulldb05-02-2019 19-51.json:/docker-entrypoint-initdb.d/dump/fulldb05-02-2019 19-51.json
             - ./dump/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     mysql:
         image: mysql
