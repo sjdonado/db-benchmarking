@@ -5,7 +5,7 @@ services:
         container_name: node
         volumes:
             - ./app:/usr/src/app
-        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; if [ ! -d 'node_modules' ]; then npm install --prefix /usr/src/app; fi; node /usr/src/app/index.js"
+        command: bash -c "while ! curl -s mysql:3306 > /dev/null; do echo waiting for mysql:3306; sleep 3; done; if [ ! -d 'node_modules' ]; then npm install --prefix /usr/src/app; fi; npm run develop --prefix /usr/src/app"
         links:
             - mongodb
             - mysql
@@ -19,7 +19,7 @@ services:
         ports:
             - 27017:27017
         volumes:
-            - ./dump/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+            - ./dump/mongo-init.short.js:/docker-entrypoint-initdb.d/mongo-init.short.js
     mysql:
         image: mysql
         container_name: mysql
@@ -27,7 +27,7 @@ services:
         ports: 
             - 3306:3306
         volumes:
-            - ./dump/fulldb05-02-2019 19-51.sql:/docker-entrypoint-initdb.d/fulldb05-02-2019 19-51.sql
+            - ./dump/shortdb05-02-2019 19-51.sql:/docker-entrypoint-initdb.d/shortdb05-02-2019 19-51.sql
         environment:
             MYSQL_DATABASE: Benchmark
             MYSQL_ROOT_PASSWORD: rootpass
