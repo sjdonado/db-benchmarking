@@ -1,22 +1,18 @@
-const { mongoclient, mysqlClient } = require('./db');
+const { mongoClient, mysqlClient } = require('./db');
+Promise.all([mongoClient, mysqlClient])
+  .then(res => {
+    console.log("Mongodb Connected!");
+    console.log("Mysql Connected!");    
+    mongoQueriesHandler(res[0].db('test'));
+    mysqlQueriesHandler(res[1]);
+  })
+  .catch( err => console.error(err));
 
-mongoclient.then(client => {
-  console.log("Mongodb Connected!");
-  const db = client.db('test');
-  mongoQueriesHandler(db);
-});
-
-
-mysqlClient.connect(function(err) {
-  if (err) {
-    throw err;
-  }
-  console.log("Mysql Connected!");
-});
-
-function mysqlQueriesHandler(db) {
+function mysqlQueriesHandler(connection) {
   console.log('-- EXECUTING MYSQL QUERIES --');
-
+  const query = 'SELECT * FROM authors LIMIT 1'
+  mysqlQueryToPromise(connection, query)
+    .then( res => console.log('MYSQL: QUERY 1 ', res));
 }
 
 function mongoQueriesHandler(db) {
@@ -32,7 +28,7 @@ function mongoQueriesHandler(db) {
         as: 'posts'
       }
     }
-  ]).toArray().then(res => console.log('QUERY 1: ', res));
+  ]).toArray().then(res => console.log('MONGO: QUERY 1 ', res));
 
   // Joins authors with their posts and exludes those who have less than 100 posts
   db.collection('authors').aggregate([
@@ -51,7 +47,7 @@ function mongoQueriesHandler(db) {
         }
       }
     }
-  ]).toArray().then(res => console.log('QUERY 2: ', res));
+  ]).toArray().then(res => console.log('MONGO: QUERY 2 ', res));
 
   // Joins authors with their posts and exludes those who have less than 40 posts 
   // and more than 80 posts
@@ -78,7 +74,7 @@ function mongoQueriesHandler(db) {
         }
       }
     }
-  ]).toArray().then(res => console.log('QUERY 3: ', res));
+  ]).toArray().then(res => console.log('MONGO: QUERY 3 ', res));
 
   // Joins authors with their posts and exludes those who have less than 50 posts 
   // and all of them was published before 2000/01/01
@@ -115,7 +111,7 @@ function mongoQueriesHandler(db) {
         }
       }
     }
-  ]).toArray().then(res => console.log('QUERY 4: ', res));
+  ]).toArray().then(res => console.log('MONGO: QUERY 4 ', res));
 
   // Joins authors with their posts and exludes those who: 
   // - were born before 1999/01/01
@@ -162,6 +158,17 @@ function mongoQueriesHandler(db) {
         }
       }
     }
-  ]).toArray().then(res => console.log('QUERY 5: ', res));
+  ]).toArray().then(res => console.log('MONGO: QUERY 5 ', res));
 }
 
+function mysqlQueryToPromise(connection, query) {
+  return new Promise((resolve, reject) => {
+    connection.query(query,(err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }     
+    })
+  })
+}
