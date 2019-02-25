@@ -812,7 +812,7 @@ const data = {
     },
     {
       "id": "2",
-      "author_id": "2",
+      "author_id": "1",
       "title": "Est quia ut fuga.",
       "description": "Ut voluptatem distinctio a possimus. Rerum numquam autem numquam quia. Saepe mollitia modi minus aliquam.",
       "content": "Commodi nisi sint quam omnis vitae qui qui ex. Nihil ut accusamus et delectus sed ducimus ratione. Dolorem itaque qui dignissimos laborum minima eligendi.",
@@ -820,7 +820,7 @@ const data = {
     },
     {
       "id": "3",
-      "author_id": "3",
+      "author_id": "1",
       "title": "Rem rerum qui consequuntur.",
       "description": "Laboriosam odit commodi qui et ipsa doloremque. Qui non aliquid voluptas libero perferendis. Quibusdam consequatur ut reiciendis est similique. Sequi aut odit eveniet autem repellendus.",
       "content": "Sint eius ea eius deserunt cum odit. Dolor aliquam maiores qui voluptatum aperiam veniam non. Consequatur ullam iusto qui aut pariatur non. Voluptatibus sint sunt quia.",
@@ -828,7 +828,7 @@ const data = {
     },
     {
       "id": "4",
-      "author_id": "4",
+      "author_id": "2",
       "title": "Nisi occaecati rerum eveniet.",
       "description": "Placeat non rerum perferendis officiis. Occaecati aliquid aperiam error. Modi voluptatum sequi aspernatur est nemo distinctio sed quia. Nihil pariatur officiis dolore id quas aut autem.",
       "content": "Est ut sequi ex velit. Enim quidem architecto quod possimus. Eos laudantium quam incidunt commodi.",
@@ -836,7 +836,7 @@ const data = {
     },
     {
       "id": "5",
-      "author_id": "5",
+      "author_id": "2",
       "title": "Veritatis non est ratione et.",
       "description": "Consequatur velit fugiat culpa odio ab id. Voluptatem illo dolorum ex labore voluptatem ratione. Non ut cumque optio saepe et.",
       "content": "Et dolore provident repellat et eius et consequatur. Voluptatem natus placeat eum qui similique optio ut occaecati. Minima voluptates eos explicabo occaecati sit dicta sit sint.",
@@ -1608,8 +1608,15 @@ const data = {
 db.createCollection('authors');
 db.createCollection('posts');
 
-data.authors.forEach(author => db.authors.insert(author));
+data.authors.forEach(author => {
+  // The following regex is neccessary because whne you try to parse string date of the original object into Date object,
+  //  the result is the delay of one month.
+  const birthdate = new Date(author.birthdate.replace(/(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1"));
+  const added = new Date(author.added);
+  db.authors.insert(Object.assign(author, {birthdate, added}));
+});
 data.posts.forEach(post => {
   const author = db.authors.findOne({ id: post.author_id });
-  db.posts.insert(Object.assign(post, { author_id: author._id }));
+  const date = new Date(post.date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1"));
+  db.posts.insert(Object.assign(post, { author_id: author._id, date }));
 });
