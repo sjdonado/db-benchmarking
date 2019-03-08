@@ -10,9 +10,21 @@ Promise.all([mongoClient, mysqlClient])
 
 function mysqlQueriesHandler(connection) {
   console.log('-- EXECUTING MYSQL QUERIES --');
-  const query = 'SELECT * FROM authors LIMIT 1'
+
+  // Joins authors with their posts
+  const query = 'SELECT authors.*, posts.* FROM authors JOIN posts ON authors.id = posts.author_id';
   mysqlQueryToPromise(connection, query)
     .then( res => console.log('MYSQL: QUERY 1 ', res));
+  
+  // Joins authors with their posts and excludes those who have less than 100 posts
+  const query2 = 'with PostCounter(cont,id) as(SELECT Count(p.author_id), p.author_id FROM posts p Group by p.author_id) SELECT a.*, p.* FROM authors a , posts p, PostCounter pc where a.id = p.author_id and pc.cont<100 and a.id=pc.id'
+  mysqlQueryToPromise(connection, query2)
+    .then( res => console.log('MYSQL: QUERY 2', res));
+  // Joins authors with their posts and exludes those who have less than 40 posts 
+  // and more than 80 posts
+  const query3 = 'with PostCounter(cont,id) as(SELECT Count(p.author_id), p.author_id FROM posts p Group by p.author_id) SELECT a.*, p.* FROM authors a , posts p, PostCounter pc where a.id = p.author_id and pc.cont<40 and pc.cont>80 and a.id=pc.id'
+  mysqlQueryToPromise(connection, query3)
+  .then( res => console.log('MYSQL: QUERY 3', res));
 }
 
 function mongoQueriesHandler(db) {
@@ -30,7 +42,7 @@ function mongoQueriesHandler(db) {
     }
   ]).toArray().then(res => console.log('MONGO: QUERY 1 ', res));
 
-  // Joins authors with their posts and exludes those who have less than 100 posts
+  // Joins authors with their posts and excludes those who have less than 100 posts
   db.collection('authors').aggregate([
     {
       $lookup: {

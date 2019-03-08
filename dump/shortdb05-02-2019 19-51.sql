@@ -24,7 +24,7 @@ INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `a
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (2, 'Irving', 'Dooley', 'lockman.vanessa@example.com', '1983-05-04', '1982-10-14 11:18:00');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (3, 'Susanna', 'Mitchell', 'ullrich.antone@example.net', '2008-09-24', '2007-08-15 14:34:12');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (4, 'Nayeli', 'Moore', 'layne35@example.net', '1986-01-15', '2013-04-07 01:58:08');
-INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (5, 'Derick', 'O\'Keefe', 'hermann.dayton@example.net', '1979-12-13', '1999-06-25 00:14:13');
+INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (5, 'Derick', 'Keefe', 'hermann.dayton@example.net', '1979-12-13', '1999-06-25 00:14:13');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (6, 'Laurence', 'Herzog', 'hermann.deion@example.org', '1970-09-15', '1974-07-15 21:49:23');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (7, 'Abelardo', 'Cole', 'lpowlowski@example.net', '1982-10-23', '1997-05-30 04:29:44');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (8, 'Liana', 'Fahey', 'alexandrea98@example.org', '1990-12-18', '1983-04-01 07:35:29');
@@ -59,7 +59,7 @@ INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `a
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (37, 'Liza', 'Schmeler', 'jhomenick@example.org', '2009-02-26', '2006-01-18 23:40:44');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (38, 'Mike', 'Cassin', 'sheldon.davis@example.org', '2006-08-11', '1985-11-18 14:54:32');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (39, 'Cicero', 'Conn', 'lorenza11@example.org', '2001-01-07', '2003-04-23 06:53:38');
-INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (40, 'Alessandro', 'O\'Reilly', 'pearl77@example.com', '1979-11-14', '1989-11-09 07:08:09');
+INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (40, 'Alessandro', 'Reilly', 'pearl77@example.com', '1979-11-14', '1989-11-09 07:08:09');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (41, 'Minerva', 'Frami', 'anibal71@example.net', '2009-09-23', '2013-05-06 21:11:23');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (42, 'Janice', 'Rogahn', 'kimberly54@example.net', '1973-05-25', '1977-04-08 06:40:43');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (43, 'Kolby', 'Weimann', 'abel44@example.com', '2011-07-27', '1977-07-18 09:12:12');
@@ -114,7 +114,7 @@ INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `a
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (92, 'Herman', 'Haley', 'horace.dibbert@example.net', '2005-03-04', '2015-10-30 11:26:31');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (93, 'Sheridan', 'Jast', 'orn.lilian@example.net', '1981-04-26', '1994-03-16 21:07:01');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (94, 'Tyler', 'Keeling', 'vita14@example.net', '1977-09-20', '2010-07-13 13:36:49');
-INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (95, 'Adrienne', 'Leannon', 'patricia.o\'reilly@example.org', '1997-06-05', '2014-03-18 23:05:13');
+INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (95, 'Adrienne', 'Leannon', 'patricia.oreilly@example.org', '1997-06-05', '2014-03-18 23:05:13');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (96, 'Darrion', 'Wilkinson', 'rogahn.fiona@example.net', '1975-10-10', '1988-04-15 22:59:07');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (97, 'Justina', 'Auer', 'mable54@example.net', '1982-04-13', '1976-06-27 21:41:43');
 INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) VALUES (98, 'Amber', 'Harvey', 'reva.feeney@example.org', '1973-12-21', '1975-02-12 22:49:05');
