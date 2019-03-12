@@ -19,7 +19,7 @@ services:
         ports:
             - 27017:27017
         volumes:
-            - ./dump/mongo-init.short.js:/docker-entrypoint-initdb.d/mongo-init.short.js
+            - ./dump/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     mysql:
         image: mysql
         container_name: mysql
@@ -27,7 +27,7 @@ services:
         ports: 
             - 3306:3306
         volumes:
-            - ./dump/shortdb05-02-2019 19-51.sql:/docker-entrypoint-initdb.d/shortdb05-02-2019 19-51.sql
+            - ./dump/fulldb11-03-2019 22-06.sql:/docker-entrypoint-initdb.d/fulldb11-03-2019 22-06.sql
         environment:
             MYSQL_DATABASE: Benchmark
             MYSQL_ROOT_PASSWORD: rootpass
